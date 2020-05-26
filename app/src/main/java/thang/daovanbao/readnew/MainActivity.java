@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter arrayAdapter;
     ArrayList<String> arrayTitle;
     ArrayList<String> arrayLink;
+    EditText editText;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         arrayLink = new ArrayList<>();
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayTitle);
         listView.setAdapter(arrayAdapter);
+        editText = findViewById(R.id.edtLink);
+        button = findViewById(R.id.btnEnter);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+                new ReadRss().execute(editText.getText().toString());
+                Log.d("add", "Đã thêm rss " + editText.getText().toString());
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 new ReadRss().execute("https://vnexpress.net/rss/the-thao.rss");
-                Log.d("capnhat", "da cap nhat sau 6h ");
+                Log.d("capnhat", "da cap nhat sau 1s ");
+
             }
         };
 
