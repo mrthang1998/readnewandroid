@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                arrayTitle.clear();
+                arrayLink.clear();
                 new ReadRss().execute(editText.getText().toString());
+                new ReadRss().execute("https://vnexpress.net/rss/the-thao.rss");
                 Log.d("add", "Đã thêm rss " + editText.getText().toString());
             }
         });
